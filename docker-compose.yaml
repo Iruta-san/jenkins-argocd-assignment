@@ -10,7 +10,7 @@ services:
     container_name: jenkins
     volumes:
       - ./jenkins_configuration:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
+      # - /var/run/docker.sock:/var/run/docker.sock
 
 
   agent:
@@ -19,6 +19,7 @@ services:
         - .env
     privileged: true
     user: root
+    # user: 1000:999
     container_name: agent
     expose:
       - 22
