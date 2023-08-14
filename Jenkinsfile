@@ -11,9 +11,9 @@ pipeline {
         REGION='us-west-2'
         
 
-        REGISTRY = "$AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com"
-        IMAGE_NAME = "$REGISTRY/$APPNAME"
-        IMAGE_TAG = "build-$BUILD_NUMBER"
+        REGISTRY =   "${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com"
+        IMAGE_NAME = "${REGISTRY}/${APPNAME}"
+        IMAGE_TAG =  "build-${BUILD_NUMBER}"
     }
 
     // Using GItHub webhook as a trigger would be much better,
@@ -39,13 +39,11 @@ pipeline {
         }
 
         stage('Docker Build') {
-            // agent {
-            //     docker { 
-            //         image 'docker:1.25'
-            //         reuseNode true
-            //     }
-            // } 
             steps {
+                // script {
+                //     REGISTRY = "${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com"
+                // }
+                echo "${REGISTRY}"
                 sh 'env | sort'
                 sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG app'
             }
