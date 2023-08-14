@@ -4,6 +4,7 @@ services:
     image: jenkins/jenkins:2.418-jdk11
     privileged: true
     user: root
+    restart: always
     ports:
       - 8080:8080
       - 50000:50000
