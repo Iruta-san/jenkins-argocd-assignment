@@ -89,7 +89,7 @@ pipeline {
         stage('Deploy Image') {
             steps {
                 script{
-                    docker.withRegistry("https://${REGISTRY}/testapp", "ecr:${REGION}:jenkins-aws-credentials") {
+                    docker.withRegistry("https://${REGISTRY}", "ecr:${REGION}:jenkins-aws-credentials") {
                         docker.image("${IMAGE_NAME}").push("build-${BUILD_NUMBER}")
                         docker.image("${IMAGE_NAME}").push("latest")
                     }
