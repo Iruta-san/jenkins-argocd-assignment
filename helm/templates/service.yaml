@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "nginx-test-app.fullname" . }}
+  namespace: {{ .Values.namespace }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ include "nginx-test-app.fullname" . }}
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+  # sessionAffinity: None # So we get to different everytime

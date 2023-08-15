@@ -1,0 +1,4 @@
+apiVersion: v2
+name: nginx-test-app
+description: A Helm chart for a Dockerized web application based on NGINX
+version: 0.0.1

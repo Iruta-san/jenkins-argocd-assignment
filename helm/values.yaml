@@ -1,0 +1,11 @@
+namespace: testapp
+replicaCount: 2
+image:
+  repository: cr.yandex/crpi6k66jr4k55pq75j9/testapp
+  tag: latest
+service:
+  type: LoadBalancer
+  port: 80
+ingress:
+  enabled: true
+  hostname: testapp.dev.analytics.corp
