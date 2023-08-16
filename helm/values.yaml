@@ -1,11 +1,11 @@
-namespace: testapp
+namespace: default
 replicaCount: 2
 image:
-  repository: cr.yandex/crpi6k66jr4k55pq75j9/testapp
-  tag: latest
+  repository: testapp
+  tag: ""
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 80
 ingress:
   enabled: true
-  hostname: testapp.dev.analytics.corp
+  hostname: example.com

@@ -16,6 +16,6 @@ spec:
       containers:
         - name: nginx-webapp
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          imagePullPolicy: Always          
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
