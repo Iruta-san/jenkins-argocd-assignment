@@ -1,11 +1,21 @@
+# Define namespace to install the application
 namespace: default
+
+# How many replicas of the application we should run
 replicaCount: 2
+
+# Replace image information with your own
 image:
   repository: testapp
   tag: ""
+
+# Define service type and port
+# ClusterIp by default
 service:
   type: ClusterIP
   port: 80
+
+# Define own hostname if ingress is enabled
 ingress:
   enabled: true
   hostname: example.com

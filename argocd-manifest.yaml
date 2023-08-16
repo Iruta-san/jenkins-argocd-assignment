@@ -9,7 +9,7 @@ spec:
   project: default
   sources:
     - repoURL: 'https://github.com/Iruta-san/jenkins-argocd-assignment'
-      targetRevision: main
+      targetRevision: master
       ref: values  
     - repoURL: 'https://github.com/Iruta-san/jenkins-argocd-assignment/'
       path: helm
@@ -19,7 +19,7 @@ spec:
           - $values/helm-values/testapp.yaml
         parameters:
           - name: replicaCount
-            value: '4'
+            value: '6'
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: testapp

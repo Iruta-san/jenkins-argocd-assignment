@@ -7,4 +7,7 @@
 GID=$(getent group docker | awk -F":" '{print $3}')
 
 # Add docker group to agent container and put user 'jenkins' there
+
+# docker exec -it jenkins bash -c "groupadd -g $GID docker; gpasswd -a jenkins docker" 
 docker exec -it agent bash -c "groupadd -g $GID docker; gpasswd -a jenkins docker" 
+docker restart agent

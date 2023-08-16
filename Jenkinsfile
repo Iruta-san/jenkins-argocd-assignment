@@ -2,13 +2,10 @@ pipeline {
     
     agent any
 
-    environment { // configure credentials to use AWS ECR
+    environment {
+        // define app name and AWS ECR address
         APPNAME='testapp'
         AWS_ACCOUNT_ID = '427560904335'
-        
-        // AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
-        // AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
-        // AWS_ACCOUNT_ID        = credentials('aws-account-id')
         REGION='us-east-2'
         
 
@@ -21,7 +18,7 @@ pipeline {
     // but I don't have an accessible URL for Jenkins server
     // so for this assignment we're going to poll the repo every minute
     triggers { 
-        pollSCM('H/1 * * * *') // Polls the repository every 1 minutes
+        pollSCM('H/2 * * * *') // Polls the repository every 1 minutes
     }
 
 
@@ -33,7 +30,7 @@ pipeline {
                     $class: 'GitSCM',
                     branches: [[name: '*/master']], // for this assignment we're only using master branch now
                     userRemoteConfigs: [[
-                        url: 'https://github.com/Iruta-san/jenkins-argocd-assignment.git' // Replace with your repository URL
+                        url: 'https://github.com/Iruta-san/jenkins-argocd-assignment.git'
                     ]]
                 ])
             }
@@ -47,8 +44,6 @@ pipeline {
         // }
         
         stage('Build image') {
-            /* This builds the actual image; synonymous to
-             * docker build on the command line */
             steps {
                 script {
                     def dockerapp = docker.build("${IMAGE_NAME}", "./app")
