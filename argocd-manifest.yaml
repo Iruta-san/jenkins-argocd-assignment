@@ -1,19 +1,28 @@
-project: default
-source:
-  repoURL: 'https://github.com/Iruta-san/jenkins-argocd-assignment/'
-  path: helm
-  targetRevision: HEAD
-  helm:
-    valueFiles:
-      - values.yaml
-    parameters:
-      - name: replicaCount
-        value: '4'
-destination:
-  server: 'https://kubernetes.default.svc'
-  namespace: testapp
-syncPolicy:
-  automated:
-    selfHeal: true
-  syncOptions:
-    - CreateNamespace=true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: testapp
+  namespace: argocd
+  labels:
+    name: testapp
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/Iruta-san/jenkins-argocd-assignment/'
+    path: helm
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+      parameters:
+        - name: replicaCount
+          value: '4'
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: testapp
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
