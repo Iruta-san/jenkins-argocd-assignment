@@ -7,16 +7,19 @@ metadata:
     name: testapp
 spec:
   project: default
-  source:
-    repoURL: 'https://github.com/Iruta-san/jenkins-argocd-assignment/'
-    path: helm
-    targetRevision: HEAD
-    helm:
-      valueFiles:
-        - helm-values/testapp.yaml
-      parameters:
-        - name: replicaCount
-          value: '4'
+  sources:
+    - repoURL: 'https://github.com/Iruta-san/jenkins-argocd-assignment'
+      targetRevision: main
+      ref: values  
+    - repoURL: 'https://github.com/Iruta-san/jenkins-argocd-assignment/'
+      path: helm
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+          - $values/helm-values/testapp.yaml
+        parameters:
+          - name: replicaCount
+            value: '4'
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: testapp
