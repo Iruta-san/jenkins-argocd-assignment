@@ -104,4 +104,6 @@ Yet, I'd consider the better practice to create a separate Helm Repository.
 ## Deploy EKS with Terraform
 In `/terraform` directory there are Terraform manifests to provision a small AWS EKS cluster with node group of maximum `t3.small` instances and right afterwards - install simple ArgoCD config from Helm Repo.
 
+The manifests are based on [AWS EKS Cluster tutorial](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks) combined with Helm release manifests to provision the cluster in one go.
+
 After apply is complete, the only thing left is to connect to cluster from console and apply ArgoCD app manifest with `kubectl`
