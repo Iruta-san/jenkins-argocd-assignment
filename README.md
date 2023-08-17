@@ -101,4 +101,7 @@ In the manifest there are two sources with the same repositoy URL declared: one 
 Yet, I'd consider the better practice to create a separate Helm Repository.
 
 
-## TODO: Deploy EKS with Terraform
+## Deploy EKS with Terraform
+In `/terraform` directory there are Terraform manifests to provision a small AWS EKS cluster with node group of maximum `t3.small` instances and right afterwards - install simple ArgoCD config from Helm Repo.
+
+After apply is complete, the only thing left is to connect to cluster from console and apply ArgoCD app manifest with `kubectl`
